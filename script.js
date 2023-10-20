@@ -1,5 +1,12 @@
 
 
+
+
+
+
+
+
+
 function RPS(PlayerChoice, ComputerChoice){
     let res;
     if(PlayerChoice === ComputerChoice){
@@ -44,12 +51,48 @@ function setPlayerChoice(){
 }
 
 
+function Game(nb_rounds){
+    let Vainqueur;
+    let ComputerChoice, PlayerChoice;
+    let Computer_Score = 0, Player_Score = 0;
+    let resultat;
+    for(let i = 0; i < nb_rounds; i++){
+        ComputerChoice = setComputerChoice();
+        PlayerChoice = setPlayerChoice();
+        console.log(`Manche ${nb_rounds} :\n Joueur : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
+        resultat = RPS(PlayerChoice, ComputerChoice);
+        console.log(resultat)
+        if(resultat === "You WIN"){
+            
+            Player_Score++;
+        }
+        else{
+            if(resultat === "You Lose"){
+                
+                Computer_Score++;
+            }
+            
+            
+        }
+        console.log(`Joueur : ${Player_Score} || Computer : ${Computer_Score}`);
+        
+    }
+    
+    vainqueur = (Player_Score > Computer_Score) ? "Joueur" : 
+    (Player_Score < Computer_Score) ? "Computer" : "Personne :("
+    console.log(`The winner is : ${vainqueur}`);
+
+}
 
 
 
-let ComputerChoice = setComputerChoice();
-let PlayerChoice = setPlayerChoice();
+let nbrounds = prompt("choose number of rounds",'3');
+
+Game(nbrounds)
 
 
-console.log(`Joueur : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
-console.log(RPS(PlayerChoice, ComputerChoice));
+
+
+
+
+
