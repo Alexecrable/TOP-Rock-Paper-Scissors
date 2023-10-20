@@ -52,7 +52,7 @@ function Game(nb_rounds){ //plays the game for as many round as wanted
     for(let i = 0; i < nb_rounds; i++){
         ComputerChoice = setComputerChoice();
         PlayerChoice = setPlayerChoice();
-        console.log(`Manche ${nb_rounds} :\n Player : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
+        console.log(`Round ${i+1} :\n Player : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
         result = RPS(PlayerChoice, ComputerChoice);
         console.log(result)
         if(result === "You WIN"){
