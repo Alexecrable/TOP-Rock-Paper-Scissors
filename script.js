@@ -23,29 +23,32 @@ function RPS(PlayerChoice, ComputerChoice){
 }
 
 
-function setComputerChoice(ComputerChoice){
+function setComputerChoice(){
+    let ComputerChoice = '';
     let random = Math.floor(Math.random() * 3) + 1;
     console.log(random);
-    (random == 1) ? ComputerChoice = "PAPER" :
-    (random == 2) ? ComputerChoice = "SCISSORS" : ComputerChoice = "ROCK"
+    ComputerChoice = (random == 1) ? "PAPER" :
+    (random == 2) ? "SCISSORS" : "ROCK"
     return ComputerChoice;
 }
 
-
-let ComputerChoice = "";
-
-ComputerChoice = setComputerChoice(ComputerChoice);
-
-
-let PlayerChoice = prompt("Choix ?", '');
-
-PlayerChoice = PlayerChoice.toUpperCase();
-
-while (PlayerChoice !== "PAPER" && PlayerChoice !== "ROCK" && PlayerChoice !== "SCISSORS"){
-    alert(`${PlayerChoice} is not a valid option.\n try with ROCK, PAPER or SCISSORS`);
-    PlayerChoice = prompt("Choix ?", '');
+function setPlayerChoice(){
+    let PlayerChoice = prompt("Choix ?", '');
     PlayerChoice = PlayerChoice.toUpperCase();
+    while (PlayerChoice !== "PAPER" && PlayerChoice !== "ROCK" && PlayerChoice !== "SCISSORS"){
+        alert(`${PlayerChoice} is not a valid option.\n try with ROCK, PAPER or SCISSORS`);
+        PlayerChoice = prompt("Choix ?", '');
+        PlayerChoice = PlayerChoice.toUpperCase();
+    }
+    return PlayerChoice;
 }
+
+
+
+
+
+let ComputerChoice = setComputerChoice();
+let PlayerChoice = setPlayerChoice();
 
 
 console.log(`Joueur : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
