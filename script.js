@@ -1,13 +1,6 @@
 
 
-
-
-
-
-
-
-
-function RPS(PlayerChoice, ComputerChoice){
+function RPS(PlayerChoice, ComputerChoice){ //Play a round of RPS
     let res;
     if(PlayerChoice === ComputerChoice){
         
@@ -30,7 +23,7 @@ function RPS(PlayerChoice, ComputerChoice){
 }
 
 
-function setComputerChoice(){
+function setComputerChoice(){ 
     let ComputerChoice = '';
     let random = Math.floor(Math.random() * 3) + 1;
     console.log(random);
@@ -41,8 +34,8 @@ function setComputerChoice(){
 
 function setPlayerChoice(){
     let PlayerChoice = prompt("Choix ?", '');
-    PlayerChoice = PlayerChoice.toUpperCase();
-    while (PlayerChoice !== "PAPER" && PlayerChoice !== "ROCK" && PlayerChoice !== "SCISSORS"){
+    PlayerChoice = PlayerChoice.toUpperCase(); 
+    while (PlayerChoice !== "PAPER" && PlayerChoice !== "ROCK" && PlayerChoice !== "SCISSORS"){ //to ensure the choice
         alert(`${PlayerChoice} is not a valid option.\n try with ROCK, PAPER or SCISSORS`);
         PlayerChoice = prompt("Choix ?", '');
         PlayerChoice = PlayerChoice.toUpperCase();
@@ -51,44 +44,47 @@ function setPlayerChoice(){
 }
 
 
-function Game(nb_rounds){
-    let Vainqueur;
+function Game(nb_rounds){ //plays the game for as many round as wanted
+    let Winner;
     let ComputerChoice, PlayerChoice;
     let Computer_Score = 0, Player_Score = 0;
-    let resultat;
+    let result;
     for(let i = 0; i < nb_rounds; i++){
         ComputerChoice = setComputerChoice();
         PlayerChoice = setPlayerChoice();
-        console.log(`Manche ${nb_rounds} :\n Joueur : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
-        resultat = RPS(PlayerChoice, ComputerChoice);
-        console.log(resultat)
-        if(resultat === "You WIN"){
+        console.log(`Manche ${nb_rounds} :\n Player : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
+        result = RPS(PlayerChoice, ComputerChoice);
+        console.log(result)
+        if(result === "You WIN"){
             
             Player_Score++;
         }
         else{
-            if(resultat === "You Lose"){
+            if(result === "You Lose"){
                 
                 Computer_Score++;
             }
             
             
         }
-        console.log(`Joueur : ${Player_Score} || Computer : ${Computer_Score}`);
+        console.log(`Player : ${Player_Score} || Computer : ${Computer_Score}`);
         
     }
     
-    vainqueur = (Player_Score > Computer_Score) ? "Joueur" : 
-    (Player_Score < Computer_Score) ? "Computer" : "Personne :("
-    console.log(`The winner is : ${vainqueur}`);
+    Winner = (Player_Score > Computer_Score) ? "Player" : 
+    (Player_Score < Computer_Score) ? "Computer" : "Nobody :("
+    console.log(`The winner is : ${Winner}`);
 
 }
 
 
 
 let nbrounds = prompt("choose number of rounds",'3');
-
-Game(nbrounds)
+while(nbrounds < 1){
+    alert("you have to play at least 1 round please");
+    nbrounds = prompt("choose number of rounds",'3');
+}
+Game(nbrounds);
 
 
 
