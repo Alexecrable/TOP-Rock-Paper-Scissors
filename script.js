@@ -1,5 +1,3 @@
-
-
 function RPS(PlayerChoice, ComputerChoice){ //Play a round of RPS
     let res;
     if(PlayerChoice === ComputerChoice){
@@ -26,68 +24,82 @@ function RPS(PlayerChoice, ComputerChoice){ //Play a round of RPS
 function setComputerChoice(){ 
     let ComputerChoice = '';
     let random = Math.floor(Math.random() * 3) + 1;
-    console.log(random);
+    
     ComputerChoice = (random == 1) ? "PAPER" :
     (random == 2) ? "SCISSORS" : "ROCK"
     return ComputerChoice;
 }
 
-function setPlayerChoice(){
-    let PlayerChoice = prompt("Choix ?", '');
-    PlayerChoice = PlayerChoice.toUpperCase(); 
-    while (PlayerChoice !== "PAPER" && PlayerChoice !== "ROCK" && PlayerChoice !== "SCISSORS"){ //to ensure the choice
-        alert(`${PlayerChoice} is not a valid option.\n try with ROCK, PAPER or SCISSORS`);
-        PlayerChoice = prompt("Choix ?", '');
-        PlayerChoice = PlayerChoice.toUpperCase();
-    }
-    return PlayerChoice;
-}
 
 
-function Game(nb_rounds){ //plays the game for as many round as wanted
-    let Winner;
-    let ComputerChoice, PlayerChoice;
-    let Computer_Score = 0, Player_Score = 0;
-    let result;
-    for(let i = 0; i < nb_rounds; i++){
-        ComputerChoice = setComputerChoice();
-        PlayerChoice = setPlayerChoice();
-        console.log(`Round ${i+1} :\n Player : ${PlayerChoice} VS Ordi : ${ComputerChoice}`);
-        result = RPS(PlayerChoice, ComputerChoice);
-        console.log(result)
-        if(result === "You WIN"){
+
+
+const results = document.querySelector(".result_round");
+const buttons = document.querySelectorAll("#choice button");
+const P_Score = document.querySelector("#P_Score");
+const C_Score = document.querySelector("#C_Score");
+const Winner = document.querySelector("#WINNER");
+const resetter = document.querySelector('#RESET');
+
+const score = document.querySelector(".score");
+
+let Computer_Score = 0, Player_Score = 0;
+
+buttons.forEach((button) => {
+    button.addEventListener(
+        "click",
+        () => {
             
-            Player_Score++;
-        }
-        else{
-            if(result === "You Lose"){
-                
-                Computer_Score++;
+            
+            let result_round = document.createElement("li");
+            result_round.className = "temp_result";
+            
+            result_round.textContent = RPS(button.textContent,setComputerChoice());
+            results.appendChild(result_round);
+           
+            if(result_round.textContent == "You WIN"){
+                Player_Score++;
             }
-            
-            
+            else{
+                if(result_round.textContent == "You Lose"){
+                 
+                    Computer_Score++;
+                }
+            }
+            if(Computer_Score == 5){
+                Winner.textContent = "COMPUTER";
+                buttons.forEach((button) => button.disabled = true);
+            }
+            else{
+                if(Player_Score == 5){
+                    Winner.textContent = "YOU";
+                    buttons.forEach((button) => button.disabled = true);
+                }
+            }
+            C_Score.textContent = Computer_Score;
+            P_Score.textContent = Player_Score;
         }
-        console.log(`Player : ${Player_Score} || Computer : ${Computer_Score}`);
+    )
+})
+
+resetter.addEventListener(
+    "click",
+    () => {
+        Player_Score = 0;
+        Computer_Score = 0;
+        Winner.textContent = "";
+        C_Score.textContent = Computer_Score;
+        P_Score.textContent = Player_Score;
+        buttons.forEach((button) => {
+            button.disabled = false;
+        });
+        const temp_res = document.querySelectorAll(".temp_result");
+        temp_res.forEach((res) => {
+            res.remove();
+        })
         
     }
-    
-    Winner = (Player_Score > Computer_Score) ? "Player" : 
-    (Player_Score < Computer_Score) ? "Computer" : "Nobody :("
-    console.log(`The winner is : ${Winner}`);
-
-}
-
-
-
-let nbrounds = prompt("choose number of rounds",'3');
-while(nbrounds < 1){
-    alert("you have to play at least 1 round please");
-    nbrounds = prompt("choose number of rounds",'3');
-}
-Game(nbrounds);
-
-
-
+)
 
 
 

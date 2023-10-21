@@ -1,0 +1,36 @@
+
+
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: grey;
+
+}
+
+#RESET{
+    
+    background-color: red;
+    color: white;
+
+}
+
+#choice{
+    display: flex;
+    flex-grow: 1;
+}
+
+button{
+    background-color: blue;
+    color: white;
+    flex-grow: 1;
+}
+
+.score{
+    background-color: pink;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
